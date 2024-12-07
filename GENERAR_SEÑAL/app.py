@@ -45,63 +45,63 @@ class SignalApp:
     def create_sidebar(self):
         """Crea la barra lateral con controles."""
         # Título de la barra lateral
-        ttk.Label(self.sidebar_frame, text="Controles de Gráficas", font=("Arial", 14)).pack(pady=10)
+        ttk.Label(self.sidebar_frame, text="CONTROLES DE GRAFICAS", font=("Space Mono", 14,"bold")).pack(pady=10)
 
         # Control de frecuencia de muestreo
-        ttk.Label(self.sidebar_frame, text="Frecuencia de muestreo (Hz):").pack(side=tk.TOP, padx=5)
+        ttk.Label(self.sidebar_frame, text="FRECUENCIA DE MUESTREO (Hz):").pack(side=tk.TOP, padx=5)
         self.fs_var = tk.IntVar(value=self.fs)
         self.fs_entry = ttk.Entry(self.sidebar_frame, textvariable=self.fs_var)
         self.fs_entry.pack(side=tk.TOP, padx=5)
 
         # Control de duración
-        ttk.Label(self.sidebar_frame, text="Duración de la señal (s):").pack(side=tk.TOP, padx=5)
+        ttk.Label(self.sidebar_frame, text="DURACION DE LA SENAL (s):").pack(side=tk.TOP, padx=5)
         self.duration_var = tk.DoubleVar(value=self.duration)
         self.duration_entry = ttk.Entry(self.sidebar_frame, textvariable=self.duration_var)
         self.duration_entry.pack(side=tk.TOP, padx=5)
 
         # Control de número de emisiones
-        ttk.Label(self.sidebar_frame, text="Número de Emisiones:").pack(side=tk.TOP, padx=5)
+        ttk.Label(self.sidebar_frame, text="NUMERO DE EMISIONES:").pack(side=tk.TOP, padx=5)
         self.num_emissions_var = tk.IntVar(value=self.num_emissions)
         self.num_emissions_entry = ttk.Entry(self.sidebar_frame, textvariable=self.num_emissions_var)
         self.num_emissions_entry.pack(side=tk.TOP, padx=5)
 
         # Control de amplitud
-        ttk.Label(self.sidebar_frame, text="Amplitud del ruido:").pack(side=tk.TOP, padx=5)
+        ttk.Label(self.sidebar_frame, text="AMPLITUD DEL RUIDO:").pack(side=tk.TOP, padx=5)
         self.amplitude_var = tk.DoubleVar(value=self.amplitude)
         self.amplitude_entry = ttk.Entry(self.sidebar_frame, textvariable=self.amplitude_var)
         self.amplitude_entry.pack(side=tk.TOP, padx=5)
 
         # Control de velocidad
-        ttk.Label(self.sidebar_frame, text="Velocidad (ms entre frames):").pack(side=tk.TOP, padx=5)
+        ttk.Label(self.sidebar_frame, text="VELOCIDAD (ms entre frames):").pack(side=tk.TOP, padx=5)
         self.speed_var = tk.IntVar(value=self.speed)
         self.speed_entry = ttk.Entry(self.sidebar_frame, textvariable=self.speed_var)
         self.speed_entry.pack(side=tk.TOP, padx=5)
 
         # Control de umbral
-        ttk.Label(self.sidebar_frame, text="Umbral de Detección:").pack(side=tk.TOP, padx=5)
+        ttk.Label(self.sidebar_frame, text="UMBRAL DE DETECCION:").pack(side=tk.TOP, padx=5)
         self.threshold_var = tk.DoubleVar(value=self.threshold)
         self.threshold_entry = ttk.Entry(self.sidebar_frame, textvariable=self.threshold_var)
         self.threshold_entry.pack(side=tk.TOP, padx=5)
 
         # Botón para generar datos
-        self.generate_button = ttk.Button(self.sidebar_frame, text="Generar Datos", command=self.generate_and_plot)
+        self.generate_button = ttk.Button(self.sidebar_frame, text="GENERAR DATOS", command=self.generate_and_plot)
         self.generate_button.pack(side=tk.TOP, pady=10)
 
         # Selección de gráfica
-        ttk.Label(self.sidebar_frame, text="Seleccionar Gráfica:").pack(side=tk.TOP, padx=5)
+        ttk.Label(self.sidebar_frame, text="SELECCION DE GRÁFICA:").pack(side=tk.TOP, padx=5)
         self.graph_selection = tk.StringVar(value="All")
-        self.graph_selector = ttk.Combobox(self.sidebar_frame, textvariable=self.graph_selection, values=["All", "Señal Original", "Señal Filtrada", "Detección"])
+        self.graph_selector = ttk.Combobox(self.sidebar_frame, textvariable=self.graph_selection, values=["All", "SEÑAL ORIGINAL", "SEÑAL FILTRADA", "SEÑALES DETECTADAS"])
         self.graph_selector.pack(side=tk.TOP, padx=5)
         
         # Asociar el evento de selección del desplegable con el método de actualización
         self.graph_selector.bind("<<ComboboxSelected>>", self.update_graph)
 
         # Botones para cambiar colores
-        ttk.Button(self.sidebar_frame, text="Color Señal Original", command=self.choose_signal_color).pack(side=tk.TOP, pady=5)
-        ttk.Button(self.sidebar_frame, text="Color Señal Filtrada", command=self.choose_filtered_color).pack(side=tk.TOP, pady=5)
-        ttk.Button(self.sidebar_frame, text="Color Detecciones", command=self.choose_detection_color).pack(side=tk.TOP, pady=5)
-        ttk.Button(self.sidebar_frame, text="Color Umbral", command=self.choose_threshold_color).pack(side=tk.TOP, pady=5)
-        ttk.Button(self.sidebar_frame, text="Color Picos", command=self.choose_peaks_color).pack(side=tk.TOP, pady=5)
+        ttk.Button(self.sidebar_frame, text="COLOR SEÑAL ORIGINAL", command=self.choose_signal_color).pack(side=tk.TOP, pady=5)
+        ttk.Button(self.sidebar_frame, text="COLOR SEÑAL FILTRADA", command=self.choose_filtered_color).pack(side=tk.TOP, pady=5)
+        ttk.Button(self.sidebar_frame, text="COLOR DETECCION", command=self.choose_detection_color).pack(side=tk.TOP, pady=5)
+        ttk.Button(self.sidebar_frame, text="COLOR UMBRAL", command=self.choose_threshold_color).pack(side=tk.TOP, pady=5)
+        ttk.Button(self.sidebar_frame, text="COLOR PICOS", command=self.choose_peaks_color).pack(side=tk.TOP, pady=5)
 
     def create_plot_area(self):
         """Crea el área de la gráfica dentro de la ventana principal."""
