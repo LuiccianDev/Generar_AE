@@ -78,7 +78,7 @@ class SignalApp:
         self.speed_entry.pack(side=tk.TOP, padx=5)
 
         # Control de umbral
-        ttk.Label(self.sidebar_frame, text="UMBRAL DE DETECCION:").pack(side=tk.TOP, padx=5)
+        ttk.Label(self.sidebar_frame, text="UMBRAL DE SEÑALES DETECTADAS:").pack(side=tk.TOP, padx=5)
         self.threshold_var = tk.DoubleVar(value=self.threshold)
         self.threshold_entry = ttk.Entry(self.sidebar_frame, textvariable=self.threshold_var)
         self.threshold_entry.pack(side=tk.TOP, padx=5)
@@ -90,18 +90,18 @@ class SignalApp:
         # Selección de gráfica
         ttk.Label(self.sidebar_frame, text="SELECCION DE GRÁFICA:").pack(side=tk.TOP, padx=5)
         self.graph_selection = tk.StringVar(value="All")
-        self.graph_selector = ttk.Combobox(self.sidebar_frame, textvariable=self.graph_selection, values=["All", "SEÑAL ORIGINAL", "SEÑAL FILTRADA", "SEÑALES DETECTADAS"])
+        self.graph_selector = ttk.Combobox(self.sidebar_frame, textvariable=self.graph_selection, values=["All", "SEÑAL ORIGINAL", "SEÑAL FILTRADA", "SEÑAL DETECTADA"])
         self.graph_selector.pack(side=tk.TOP, padx=5)
         
         # Asociar el evento de selección del desplegable con el método de actualización
         self.graph_selector.bind("<<ComboboxSelected>>", self.update_graph)
 
         # Botones para cambiar colores
-        ttk.Button(self.sidebar_frame, text="COLOR SEÑAL ORIGINAL", command=self.choose_signal_color).pack(side=tk.TOP, pady=5)
-        ttk.Button(self.sidebar_frame, text="COLOR SEÑAL FILTRADA", command=self.choose_filtered_color).pack(side=tk.TOP, pady=5)
-        ttk.Button(self.sidebar_frame, text="COLOR DETECCION", command=self.choose_detection_color).pack(side=tk.TOP, pady=5)
-        ttk.Button(self.sidebar_frame, text="COLOR UMBRAL", command=self.choose_threshold_color).pack(side=tk.TOP, pady=5)
-        ttk.Button(self.sidebar_frame, text="COLOR PICOS", command=self.choose_peaks_color).pack(side=tk.TOP, pady=5)
+        ttk.Button(self.sidebar_frame, text="COLOR SEÑAL ORIGINAL", command=self.choose_signal_color, width=30).pack(side=tk.TOP, pady=5)
+        ttk.Button(self.sidebar_frame, text="COLOR SEÑAL FILTRADA", command=self.choose_filtered_color,width=30).pack(side=tk.TOP, pady=5)
+        ttk.Button(self.sidebar_frame, text="COLOR SEÑAL DETECTADA", command=self.choose_detection_color,width=30).pack(side=tk.TOP, pady=5)
+        ttk.Button(self.sidebar_frame, text="COLOR UMBRAL", command=self.choose_threshold_color,width=30).pack(side=tk.TOP, pady=5)
+        ttk.Button(self.sidebar_frame, text="COLOR PICOS", command=self.choose_peaks_color,width=30).pack(side=tk.TOP, pady=5)
 
     def create_plot_area(self):
         """Crea el área de la gráfica dentro de la ventana principal."""
@@ -193,12 +193,12 @@ class SignalApp:
         # Determinar qué graficar según la selección
         selection = self.graph_selection.get()
 
-        if selection == "Señal Original" or selection == "All":
-            self.ax.plot(self.time, self.signal, label="Señal Original", color=self.signal_color)
-        if selection == "Señal Filtrada" or selection == "All":
-            self.ax.plot(self.time, self.filtered_signal, label="Señal Filtrada", color=self.filtered_color)
-        if selection == "Detección" or selection == "All":
-            self.ax.plot(self.time, self.detections, label="Detección", color=self.detection_color)
+        if selection == "SEÑAL ORIGINAL" or selection == "All":
+            self.ax.plot(self.time, self.signal, label="SEÑAL ORIGINAL", color=self.signal_color)
+        if selection == "SEÑAL FILTRADA" or selection == "All":
+            self.ax.plot(self.time, self.filtered_signal, label="SEÑAL FILTRADA", color=self.filtered_color)
+        if selection == "SEÑAL DETECTADA" or selection == "All":
+            self.ax.plot(self.time, self.detections, label="SEÑAL DETECTADA", color=self.detection_color)
 
         self.ax.legend()
 
@@ -211,13 +211,13 @@ class SignalApp:
 
         # Controlar la visibilidad de las gráficas
         if selection == "All":
-            self.ax.plot(self.time, self.signal, label="Señal Original", color=self.signal_color)
-            self.ax.plot(self.time, self.filtered_signal, label="Señal Filtrada", color=self.filtered_color)
+            self.ax.plot(self.time, self.signal, label="SEÑAL ORIGINAL", color=self.signal_color)
+            self.ax.plot(self.time, self.filtered_signal, label="SEÑAL FILTRADA", color=self.filtered_color)
             self.ax.plot(self.time, self.detections, label="Detección", color=self.detection_color)
-        elif selection == "Señal Original":
-            self.ax.plot(self.time, self.signal, label="Señal Original", color=self.signal_color)
-        elif selection == "Señal Filtrada":
-            self.ax.plot(self.time, self.filtered_signal, label="Señal Filtrada", color=self.filtered_color)
+        elif selection == "SEÑAL ORIGINAL":
+            self.ax.plot(self.time, self.signal, label="SEÑAL ORIGINAL", color=self.signal_color)
+        elif selection == "SEÑAL FILTRADA":
+            self.ax.plot(self.time, self.filtered_signal, label="SEÑAL FILTRADA", color=self.filtered_color)
         elif selection == "Detección":
             self.ax.plot(self.time, self.detections, label="Detección", color=self.detection_color)
 
