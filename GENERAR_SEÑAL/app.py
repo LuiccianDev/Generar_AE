@@ -43,8 +43,11 @@ class SignalApp:
         # Crear el estilo para ttk
         self.style = ttk.Style()
         self.style.configure("TFrame", background="#032F30")  # Color de fondo para los frames de ttk
-        self.style.configure("TLabel", background="#0A7075", foreground="white")  # Color de fondo y texto para los labels
+        self.style.configure("TLabel", background="#032F30", foreground="white") 
+        """ self.style.configure("TLabel", background="#0A7075", foreground="white")  # Color de fondo y texto para los labels """
         self.style.configure("TButton", background="#6ba3be", foreground="#032f30", cursor="hand2")  # Color de fondo y texto para botones 
+        self.style.configure("TEntry", background="#032F30", foreground="#032f30", fieldbackground="#032F30")
+
 
         # Crear contenedor de la ventana principal
         self.main_frame = ttk.Frame(self.root)
@@ -60,47 +63,50 @@ class SignalApp:
 
     def create_sidebar(self):
         """Crea la barra lateral con controles."""
+
+        
         # Título de la barra lateral
-        ttk.Label(self.sidebar_frame, text="CONTROLES DE GRAFICAS", font=("Space Mono", 14,"bold"), justify="center",width=25,anchor="center").pack(pady=20,padx=10)
+        ttk.Label(self.sidebar_frame, text="CONTROLES DE GRAFICAS", font=("Franklin Gothic", 14,"bold"), justify="center",width=25,anchor="center").pack(pady=20,padx=15)
+        
 
         # Control de frecuencia de muestreo
-        ttk.Label(self.sidebar_frame, text="FRECUENCIA DE MUESTREO (Hz)",width=40,anchor="center").pack(side=tk.TOP, padx=20,pady=5)
+        ttk.Label(self.sidebar_frame, text="FRECUENCIA DE MUESTREO (Hz)",width=40,anchor="center",font=("Franklin Gothic", 10)).pack(side=tk.TOP, padx=20,pady=5)
         self.fs_var = tk.IntVar(value=self.fs)
-        self.fs_entry = ttk.Entry(self.sidebar_frame, textvariable=self.fs_var, justify="center")
+        self.fs_entry = ttk.Entry(self.sidebar_frame, textvariable=self.fs_var, justify="center",width=30,style="TEntry")
         self.fs_entry.pack(side=tk.TOP, padx=5)
 
         # Control de duración
-        ttk.Label(self.sidebar_frame, text="DURACION DE LA SEÑAL (s)",width=40,anchor="center").pack(side=tk.TOP, padx=20,pady=5)
+        ttk.Label(self.sidebar_frame, text="DURACION DE LA SEÑAL (s)",width=40,anchor="center",font=("Franklin Gothic", 10)).pack(side=tk.TOP, padx=20,pady=5)
         self.duration_var = tk.DoubleVar(value=self.duration)
-        self.duration_entry = ttk.Entry(self.sidebar_frame, textvariable=self.duration_var,justify="center")
+        self.duration_entry = ttk.Entry(self.sidebar_frame, textvariable=self.duration_var,justify="center",width=30,background="#032F30",)
         self.duration_entry.pack(side=tk.TOP, padx=5)
 
         # Control de número de emisiones
-        ttk.Label(self.sidebar_frame, text="NUMERO DE EMISIONES",width=40,anchor="center").pack(side=tk.TOP, padx=20,pady=5)
+        ttk.Label(self.sidebar_frame, text="NUMERO DE EMISIONES",width=40,anchor="center",font=("Franklin Gothic", 10)).pack(side=tk.TOP, padx=20,pady=5)
         self.num_emissions_var = tk.IntVar(value=self.num_emissions)
-        self.num_emissions_entry = ttk.Entry(self.sidebar_frame, textvariable=self.num_emissions_var,justify="center")
+        self.num_emissions_entry = ttk.Entry(self.sidebar_frame, textvariable=self.num_emissions_var,justify="center",width=30)
         self.num_emissions_entry.pack(side=tk.TOP, padx=5)
 
         # Control de amplitud
-        ttk.Label(self.sidebar_frame, text="AMPLITUD DEL RUIDO",width=40,anchor="center").pack(side=tk.TOP, padx=20,pady=5)
+        ttk.Label(self.sidebar_frame, text="AMPLITUD DEL RUIDO",width=40,anchor="center",font=("Franklin Gothic", 10)).pack(side=tk.TOP, padx=20,pady=5)
         self.amplitude_var = tk.DoubleVar(value=self.amplitude)
-        self.amplitude_entry = ttk.Entry(self.sidebar_frame, textvariable=self.amplitude_var,justify="center")
+        self.amplitude_entry = ttk.Entry(self.sidebar_frame, textvariable=self.amplitude_var,justify="center",width=30)
         self.amplitude_entry.pack(side=tk.TOP, padx=5)
 
         # Control de velocidad
-        ttk.Label(self.sidebar_frame, text="VELOCIDAD (ms entre frames)",width=40,anchor="center").pack(side=tk.TOP, padx=20,pady=5)
+        ttk.Label(self.sidebar_frame, text="VELOCIDAD (ms entre frames)",width=40,anchor="center",font=("Franklin Gothic", 10)).pack(side=tk.TOP, padx=20,pady=5)
         self.speed_var = tk.IntVar(value=self.speed)
-        self.speed_entry = ttk.Entry(self.sidebar_frame, textvariable=self.speed_var,justify="center")
+        self.speed_entry = ttk.Entry(self.sidebar_frame, textvariable=self.speed_var,justify="center",width=30)
         self.speed_entry.pack(side=tk.TOP, padx=5)
 
         # Control de umbral
-        ttk.Label(self.sidebar_frame, text="UMBRAL DE SEÑALES DETECTADAS",width=40,anchor="center").pack(side=tk.TOP, padx=20,pady=5)
+        ttk.Label(self.sidebar_frame, text="UMBRAL DE SEÑALES DETECTADAS",width=40,anchor="center",font=("Franklin Gothic", 10)).pack(side=tk.TOP, padx=20,pady=5)
         self.threshold_var = tk.DoubleVar(value=self.threshold)
-        self.threshold_entry = ttk.Entry(self.sidebar_frame, textvariable=self.threshold_var,justify="center")
+        self.threshold_entry = ttk.Entry(self.sidebar_frame, textvariable=self.threshold_var,justify="center",width=30)
         self.threshold_entry.pack(side=tk.TOP, padx=5)
 
         # Selección de gráfica
-        ttk.Label(self.sidebar_frame, text="SELECCION DE GRÁFICA",width=40,anchor="center").pack(side=tk.TOP, padx=20,pady=10,anchor="center",)
+        ttk.Label(self.sidebar_frame, text="SELECCION DE GRÁFICA",width=40,anchor="center",font=("Franklin Gothic", 10)).pack(side=tk.TOP, padx=20,pady=10,anchor="center",)
         self.graph_selection = tk.StringVar(value="All")
         self.graph_selector = ttk.Combobox(self.sidebar_frame, textvariable=self.graph_selection, values=["All", "SEÑAL ORIGINAL", "SEÑAL FILTRADA", "SEÑAL DETECTADA"],justify="center",width=28)
         self.graph_selector.pack(side=tk.TOP, padx=5,pady=5)
@@ -116,9 +122,11 @@ class SignalApp:
         ttk.Button(self.sidebar_frame, text="COLOR PICOS", command=self.choose_peaks_color,width=30).pack(side=tk.TOP, pady=5) """
         
         # Botón para generar datos
-        self.generate_button = ttk.Button(self.sidebar_frame, text="GENERAR DATOS", command=self.generate_and_plot, width=30)
+        self.generate_button = ttk.Button(self.sidebar_frame, text="GENERAR DATOS", command=self.generate_and_plot, width=30,)
         self.generate_button.pack(side=tk.TOP, pady=20)
 
+        #Autor
+        ttk.Label(self.sidebar_frame, text="AUTOR: LUICCIANDEV", font=("Franklin Gothic", 8,), justify="center",width=25,anchor="center").pack(pady=10,padx=10)
     def create_plot_area(self):
         """Crea el área de la gráfica dentro de la ventana principal."""
         # Frame para la gráfica
