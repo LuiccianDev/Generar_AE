@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import ttk, colorchooser, filedialog
-
 from signal_processing import generate_signal, bandpass_filter
 """ from utils import save_data_to_csv, save_figure_as_image """
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
