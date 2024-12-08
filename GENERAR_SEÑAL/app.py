@@ -5,6 +5,7 @@ from signal_processing import generate_signal, bandpass_filter
 """ from utils import save_data_to_csv, save_figure_as_image """
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
+from utils import save_data_to_csv,save_figure_as_image
 
 class SignalApp:
     def __init__(self, root):
@@ -60,6 +61,28 @@ class SignalApp:
         # Crear las pestañas y controles
         self.create_sidebar()
         self.create_plot_area()
+        # Create menu
+        self.create_menu()
+
+    def create_menu(self):
+        """Crea el menú en la barra de menú superior."""
+        menu_bar = tk.Menu(self.root)
+
+        # Crear el menú "Archivo"
+        file_menu = tk.Menu(menu_bar, tearoff=0)
+        menu_bar.add_cascade(label="Archivo", menu=file_menu)
+        file_menu.add_command(label="Guardar Datos CSV", command=self.save_data)
+        file_menu.add_command(label="Guardar Gráfica PNG", command=self.save_image)
+        file_menu.add_separator()
+        file_menu.add_command(label="Salir", command=self.root.quit)
+        
+        """ # Crear el menú "Opciones"
+        options_menu = tk.Menu(menu_bar, tearoff=0)
+        menu_bar.add_cascade(label="Opciones", menu=options_menu)
+        options_menu.add_command(label="Cambiar Color", command=self.change_color)  # Puedes agregar un método para cambiar color
+        options_menu.add_command(label="Restaurar Valores", command=self.restore_defaults)  # Agrega un método para restaurar valores predeterminados """
+
+        self.root.config(menu=menu_bar)
 
     def create_sidebar(self):
         """Crea la barra lateral con controles."""
@@ -249,13 +272,13 @@ class SignalApp:
         self.ax.legend()
         self.canvas.draw()
 
-    """ def save_data(self):
+    def save_data(self):
         #*Guardar los datos generados en un archivo CSV.
         save_data_to_csv(self.time, self.signal, self.filtered_signal, self.detections)
 
     def save_image(self):
         #*Guardar la gráfica actual como imagen.
-        save_figure_as_image(self.fig) """
+        save_figure_as_image(self.fig)
 
     def run(self):
         self.root.mainloop()
