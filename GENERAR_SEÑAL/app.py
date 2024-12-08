@@ -264,8 +264,8 @@ class SignalApp:
             self.ax.plot(self.time, self.signal, label="SEÑAL ORIGINAL", color=self.signal_color)
         elif selection == "SEÑAL FILTRADA":
             self.ax.plot(self.time, self.filtered_signal, label="SEÑAL FILTRADA", color=self.filtered_color)
-        elif selection == "Detección":
-            self.ax.plot(self.time, self.detections, label="Detección", color=self.detection_color)
+        elif selection == "SEÑAL DETECTADA":
+            self.ax.plot(self.time, self.detections, label="SEÑAL DETECTADA", color=self.detection_color)
 
         self.ax.legend()
         self.canvas.draw()
