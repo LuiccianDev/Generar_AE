@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk, colorchooser, filedialog
 
 from signal_processing import generate_signal, bandpass_filter
-from utils import save_data_to_csv, save_figure_as_image
+""" from utils import save_data_to_csv, save_figure_as_image """
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 
@@ -108,12 +108,12 @@ class SignalApp:
         # Asociar el evento de selección del desplegable con el método de actualización
         self.graph_selector.bind("<<ComboboxSelected>>", self.update_graph)
         
-        # Botones para cambiar colores
+        """ # Botones para cambiar colores
         ttk.Button(self.sidebar_frame, text="COLOR SEÑAL ORIGINAL", command=self.choose_signal_color, width=30).pack(side=tk.TOP, pady=5)
         ttk.Button(self.sidebar_frame, text="COLOR SEÑAL FILTRADA", command=self.choose_filtered_color,width=30).pack(side=tk.TOP, pady=5)
         ttk.Button(self.sidebar_frame, text="COLOR SEÑAL DETECTADA", command=self.choose_detection_color,width=30).pack(side=tk.TOP, pady=5)
         ttk.Button(self.sidebar_frame, text="COLOR UMBRAL", command=self.choose_threshold_color,width=30).pack(side=tk.TOP, pady=5)
-        ttk.Button(self.sidebar_frame, text="COLOR PICOS", command=self.choose_peaks_color,width=30).pack(side=tk.TOP, pady=5)
+        ttk.Button(self.sidebar_frame, text="COLOR PICOS", command=self.choose_peaks_color,width=30).pack(side=tk.TOP, pady=5) """
         
         # Botón para generar datos
         self.generate_button = ttk.Button(self.sidebar_frame, text="GENERAR DATOS", command=self.generate_and_plot, width=30)
@@ -122,11 +122,12 @@ class SignalApp:
     def create_plot_area(self):
         """Crea el área de la gráfica dentro de la ventana principal."""
         # Frame para la gráfica
-        plot_frame = ttk.Frame(self.main_frame, padding="10",border=2,relief="groove")
+        plot_frame = ttk.Frame(self.main_frame, padding="20",border=4,relief="groove")
         plot_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
         # Crear figura de Matplotlib
-        self.fig = Figure(figsize=(10, 5), dpi=100)
+        self.fig = Figure(figsize=(10, 5), dpi=100,linewidth=5)
+        
         self.ax = self.fig.add_subplot(111)
 
         # Embedding de Matplotlib en Tkinter
@@ -240,13 +241,13 @@ class SignalApp:
         self.ax.legend()
         self.canvas.draw()
 
-    def save_data(self):
-        """Guardar los datos generados en un archivo CSV."""
+    """ def save_data(self):
+        #*Guardar los datos generados en un archivo CSV.
         save_data_to_csv(self.time, self.signal, self.filtered_signal, self.detections)
 
     def save_image(self):
-        """Guardar la gráfica actual como imagen."""
-        save_figure_as_image(self.fig)
+        #*Guardar la gráfica actual como imagen.
+        save_figure_as_image(self.fig) """
 
     def run(self):
         self.root.mainloop()
