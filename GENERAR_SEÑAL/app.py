@@ -70,7 +70,7 @@ class SignalApp:
 
         # Crear el menú "Archivo"
         file_menu = tk.Menu(menu_bar, tearoff=0)
-        menu_bar.add_cascade(label="Archivo", menu=file_menu)
+        menu_bar.add_cascade(label="gurardar", menu=file_menu)
         file_menu.add_command(label="Guardar Datos CSV", command=self.save_data)
         file_menu.add_command(label="Guardar Gráfica PNG", command=self.save_image)
         file_menu.add_separator()
