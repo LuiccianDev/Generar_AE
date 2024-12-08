@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, colorchooser, filedialog
+from turtle import back
 from signal_processing import generate_signal, bandpass_filter
 from utils import save_data_to_csv, save_figure_as_image
 import numpy as np
@@ -9,7 +10,10 @@ from matplotlib.figure import Figure
 class SignalApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Control de Señales y Gráficas")
+        self.root.title("CONTROL DE SEÑALES Y GRÁFICAS")
+        self.root.geometry("1500x600")
+        self.root.resizable(True, True)
+        self.root.config(bg="#413b61", cursor="hand2")
 
         # Parámetros iniciales
         self.fs = 5000  # Frecuencia de muestreo
@@ -45,42 +49,43 @@ class SignalApp:
     def create_sidebar(self):
         """Crea la barra lateral con controles."""
         # Título de la barra lateral
-        ttk.Label(self.sidebar_frame, text="CONTROLES DE GRAFICAS", font=("Space Mono", 14,"bold")).pack(pady=10)
+        ttk.Label(self.sidebar_frame, text="CONTROLES DE GRAFICAS", font=("Space Mono", 14,"bold"), 
+                    justify="center",background="#413b61", foreground="white",width=25,anchor="center").pack(pady=20)
 
         # Control de frecuencia de muestreo
-        ttk.Label(self.sidebar_frame, text="FRECUENCIA DE MUESTREO (Hz):").pack(side=tk.TOP, padx=5)
+        ttk.Label(self.sidebar_frame, text="FRECUENCIA DE MUESTREO (Hz):").pack(side=tk.TOP, padx=10)
         self.fs_var = tk.IntVar(value=self.fs)
-        self.fs_entry = ttk.Entry(self.sidebar_frame, textvariable=self.fs_var)
+        self.fs_entry = ttk.Entry(self.sidebar_frame, textvariable=self.fs_var, justify="center")
         self.fs_entry.pack(side=tk.TOP, padx=5)
 
         # Control de duración
         ttk.Label(self.sidebar_frame, text="DURACION DE LA SENAL (s):").pack(side=tk.TOP, padx=5)
         self.duration_var = tk.DoubleVar(value=self.duration)
-        self.duration_entry = ttk.Entry(self.sidebar_frame, textvariable=self.duration_var)
+        self.duration_entry = ttk.Entry(self.sidebar_frame, textvariable=self.duration_var,justify="center")
         self.duration_entry.pack(side=tk.TOP, padx=5)
 
         # Control de número de emisiones
         ttk.Label(self.sidebar_frame, text="NUMERO DE EMISIONES:").pack(side=tk.TOP, padx=5)
         self.num_emissions_var = tk.IntVar(value=self.num_emissions)
-        self.num_emissions_entry = ttk.Entry(self.sidebar_frame, textvariable=self.num_emissions_var)
+        self.num_emissions_entry = ttk.Entry(self.sidebar_frame, textvariable=self.num_emissions_var,justify="center")
         self.num_emissions_entry.pack(side=tk.TOP, padx=5)
 
         # Control de amplitud
         ttk.Label(self.sidebar_frame, text="AMPLITUD DEL RUIDO:").pack(side=tk.TOP, padx=5)
         self.amplitude_var = tk.DoubleVar(value=self.amplitude)
-        self.amplitude_entry = ttk.Entry(self.sidebar_frame, textvariable=self.amplitude_var)
+        self.amplitude_entry = ttk.Entry(self.sidebar_frame, textvariable=self.amplitude_var,justify="center")
         self.amplitude_entry.pack(side=tk.TOP, padx=5)
 
         # Control de velocidad
         ttk.Label(self.sidebar_frame, text="VELOCIDAD (ms entre frames):").pack(side=tk.TOP, padx=5)
         self.speed_var = tk.IntVar(value=self.speed)
-        self.speed_entry = ttk.Entry(self.sidebar_frame, textvariable=self.speed_var)
+        self.speed_entry = ttk.Entry(self.sidebar_frame, textvariable=self.speed_var,justify="center")
         self.speed_entry.pack(side=tk.TOP, padx=5)
 
         # Control de umbral
         ttk.Label(self.sidebar_frame, text="UMBRAL DE SEÑALES DETECTADAS:").pack(side=tk.TOP, padx=5)
         self.threshold_var = tk.DoubleVar(value=self.threshold)
-        self.threshold_entry = ttk.Entry(self.sidebar_frame, textvariable=self.threshold_var)
+        self.threshold_entry = ttk.Entry(self.sidebar_frame, textvariable=self.threshold_var,justify="center")
         self.threshold_entry.pack(side=tk.TOP, padx=5)
 
         # Botón para generar datos
@@ -90,7 +95,7 @@ class SignalApp:
         # Selección de gráfica
         ttk.Label(self.sidebar_frame, text="SELECCION DE GRÁFICA:").pack(side=tk.TOP, padx=5)
         self.graph_selection = tk.StringVar(value="All")
-        self.graph_selector = ttk.Combobox(self.sidebar_frame, textvariable=self.graph_selection, values=["All", "SEÑAL ORIGINAL", "SEÑAL FILTRADA", "SEÑAL DETECTADA"])
+        self.graph_selector = ttk.Combobox(self.sidebar_frame, textvariable=self.graph_selection, values=["All", "SEÑAL ORIGINAL", "SEÑAL FILTRADA", "SEÑAL DETECTADA"],justify="center")
         self.graph_selector.pack(side=tk.TOP, padx=5)
         
         # Asociar el evento de selección del desplegable con el método de actualización
@@ -106,11 +111,11 @@ class SignalApp:
     def create_plot_area(self):
         """Crea el área de la gráfica dentro de la ventana principal."""
         # Frame para la gráfica
-        plot_frame = ttk.Frame(self.main_frame, padding="10")
+        plot_frame = ttk.Frame(self.main_frame, padding="10",border=2,relief="groove")
         plot_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
         # Crear figura de Matplotlib
-        self.fig = Figure(figsize=(10, 6), dpi=100)
+        self.fig = Figure(figsize=(10, 5), dpi=100)
         self.ax = self.fig.add_subplot(111)
 
         # Embedding de Matplotlib en Tkinter
