@@ -11,6 +11,9 @@ Este proyecto permite generar y visualizar señales electrónicas simuladas util
 - Controles interactivos para modificar parámetros de las señales.
 - Personalización de colores de las señales y gráficos.
 
+## Modelo de Predicicon de Sostenimineto 
+- Generar una red neuronal de 12 entradas  para 4 salidas
+
 ## Requisitos
 
 - Python 3.6 o superior.
