@@ -20,7 +20,7 @@ class SignalApp:
                                 arrowcolor="#ffffff",  # Color de las flechas
                                 width=12)  # Ancho de la barra de desplazamiento """
 
-        # Parámetros iniciales
+        #todo Parámetros iniciales
         self.fs = 5000  # Frecuencia de muestreo
         self.duration = 5  # Duración de la señal en segundos
         self.num_emissions = 10  # Número de emisiones
@@ -39,7 +39,7 @@ class SignalApp:
         self.filtered_signal = None
         self.detections = None
 
-        # Crear el estilo para ttk
+        #todo Crear el estilo para ttk
         self.style = ttk.Style()
         self.style.configure("TFrame", background="#032F30")  # Color de fondo para los frames de ttk
         self.style.configure("TLabel", background="#032F30", foreground="white") 
@@ -56,14 +56,14 @@ class SignalApp:
         self.sidebar_frame = ttk.Frame(self.root, width=200, relief="sunken", padding="10")
         self.sidebar_frame.pack(side=tk.LEFT, fill=tk.Y)
 
-        # Crear las pestañas y controles
+        #! Crear las pestañas y controles
         self.create_sidebar()
         self.create_plot_area()
-        # Create menu
+        #! Create menu
         self.create_menu()
 
     def create_menu(self):
-        """Crea el menú en la barra de menú superior."""
+        #*Crea el menú en la barra de menú superior.
         menu_bar = tk.Menu(self.root)
 
         # Crear el menú "Archivo"
@@ -74,7 +74,7 @@ class SignalApp:
         file_menu.add_separator()
         file_menu.add_command(label="Salir", command=self.root.quit)
         
-        """ # Crear el menú "Opciones"
+        """Crear el menú "Opciones"
         options_menu = tk.Menu(menu_bar, tearoff=0)
         menu_bar.add_cascade(label="Opciones", menu=options_menu)
         options_menu.add_command(label="Cambiar Color", command=self.change_color)  # Puedes agregar un método para cambiar color
@@ -83,9 +83,8 @@ class SignalApp:
         self.root.config(menu=menu_bar)
 
     def create_sidebar(self):
-        """Crea la barra lateral con controles."""
+        #*Crea la barra lateral con controles.
 
-        
         # Título de la barra lateral
         ttk.Label(self.sidebar_frame, text="CONTROLES DE GRAFICAS", font=("Franklin Gothic", 14,"bold"), justify="center",width=25,anchor="center").pack(pady=20,padx=15)
         
@@ -135,7 +134,7 @@ class SignalApp:
         # Asociar el evento de selección del desplegable con el método de actualización
         self.graph_selector.bind("<<ComboboxSelected>>", self.update_graph)
         
-        """ # Botones para cambiar colores
+        """Botones para cambiar colores
         ttk.Button(self.sidebar_frame, text="COLOR SEÑAL ORIGINAL", command=self.choose_signal_color, width=30).pack(side=tk.TOP, pady=5)
         ttk.Button(self.sidebar_frame, text="COLOR SEÑAL FILTRADA", command=self.choose_filtered_color,width=30).pack(side=tk.TOP, pady=5)
         ttk.Button(self.sidebar_frame, text="COLOR SEÑAL DETECTADA", command=self.choose_detection_color,width=30).pack(side=tk.TOP, pady=5)
@@ -149,7 +148,7 @@ class SignalApp:
         #Autor
         ttk.Label(self.sidebar_frame, text="AUTOR: LUICCIANDEV", font=("Franklin Gothic", 8,), justify="center",width=25,anchor="center").pack(pady=10,padx=10)
     def create_plot_area(self):
-        """Crea el área de la gráfica dentro de la ventana principal."""
+        #*Crea el área de la gráfica dentro de la ventana principal.
         # Frame para la gráfica
         plot_frame = ttk.Frame(self.main_frame, padding="20",border=4,relief="groove")
         plot_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
@@ -164,38 +163,38 @@ class SignalApp:
         self.canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
     def choose_signal_color(self):
-        """Abrir el selector de color para la señal original."""
+        #*Abrir el selector de color para la señal original.
         color = colorchooser.askcolor()[1]
         if color:
             self.signal_color = color
 
     def choose_filtered_color(self):
-        """Abrir el selector de color para la señal filtrada."""
+        #*Abrir el selector de color para la señal filtrada.
         color = colorchooser.askcolor()[1]
         if color:
             self.filtered_color = color
 
     def choose_detection_color(self):
-        """Abrir el selector de color para las detecciones."""
+        #*Abrir el selector de color para las detecciones
         color = colorchooser.askcolor()[1]
         if color:
             self.detection_color = color
 
     def choose_threshold_color(self):
-        """Abrir el selector de color para el umbral."""
+        #*Abrir el selector de color para el umbral
         color = colorchooser.askcolor()[1]
         if color:
             self.threshold_color = color
 
     def choose_peaks_color(self):
-        """Abrir el selector de color para los picos (puntos altos)."""
+        #*Abrir el selector de color para los picos (puntos altos)
         color = colorchooser.askcolor()[1]
         if color:
             self.peaks_color = color
 
     def generate_and_plot(self):
-        """Generar los datos y actualizar la gráfica."""
-        # Leer los nuevos valores de los parámetros
+        #*Generar los datos y actualizar la gráfica
+        #! Leer los nuevos valores de los parámetros
         self.fs = self.fs_var.get()
         self.duration = self.duration_var.get()
         self.num_emissions = self.num_emissions_var.get()
@@ -220,12 +219,12 @@ class SignalApp:
         # Controlar la visibilidad de las gráficas
         self.control_visibility()
 
-        # Actualizar el canvas
+        #! Actualizar el canvas
         self.canvas.draw()
 
     def update_graph(self, event=None):
-        """Actualiza la gráfica según la selección del desplegable."""
-        # Limpiar la gráfica antes de redibujar
+        #*Actualiza la gráfica según la selección del desplegable
+        #! Limpiar la gráfica antes de redibujar
         self.ax.clear()
 
         # Establecer límites automáticos según los datos generados
@@ -248,11 +247,11 @@ class SignalApp:
 
         self.ax.legend()
 
-        # Actualizar el canvas con la nueva gráfica
+        #! Actualizar el canvas con la nueva gráfica
         self.canvas.draw()
 
     def control_visibility(self):
-        """Controla la visibilidad de las gráficas según la selección del usuario."""
+        #*Controla la visibilidad de las gráficas según la selección del usuario
         selection = self.graph_selection.get()
 
         # Controlar la visibilidad de las gráficas
