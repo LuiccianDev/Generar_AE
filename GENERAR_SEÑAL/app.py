@@ -40,12 +40,12 @@ class SignalApp:
         self.detections = None
 
         #todo Crear el estilo para ttk
-        self.style = ttk.Style()
+        """ self.style = ttk.Style()
         self.style.configure("TFrame", background="#032F30")  # Color de fondo para los frames de ttk
         self.style.configure("TLabel", background="#032F30", foreground="white") 
-        """ self.style.configure("TLabel", background="#0A7075", foreground="white")  # Color de fondo y texto para los labels """
+        #self.style.configure("TLabel", background="#0A7075", foreground="white")  # Color de fondo y texto para los labels 
         self.style.configure("TButton", background="#6ba3be", foreground="#032f30", cursor="hand2")  # Color de fondo y texto para botones 
-        self.style.configure("TEntry", background="#032F30", foreground="#032f30", fieldbackground="#032F30")
+        self.style.configure("TEntry", background="#032F30", foreground="#032f30", fieldbackground="#032F30") """
 
 
         # Crear contenedor de la ventana principal
